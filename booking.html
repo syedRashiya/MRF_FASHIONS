@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Service | MRF FASHIONS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">MRF FASHIONS</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="nav-icons" style="display: flex; gap: 1.5rem; align-items: center;">
+                <a href="cart.html" style="position: relative;">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count-badge">0</span>
+                </a>
+                <a href="booking.html" class="btn btn-outline" style="padding: 0.5rem 1.5rem; font-size: 0.7rem;">Book
+                    Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Booking Content -->
+    <section style="padding-top: 150px;">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-header">
+                <h2>Secure Your Appointment</h2>
+                <p style="margin-top: 10px; color: var(--text-muted);">Please fill in your details to book a verified
+                    agent for your home service.</p>
+                <div class="divider"></div>
+            </div>
+
+            <form id="booking-form"
+                style="background: var(--surface); padding: 4rem; border: 1px solid var(--border); box-shadow: var(--shadow);">
+                <!-- Step 1: Service Selection -->
+                <div style="margin-bottom: 3rem;">
+                    <h4
+                        style="margin-bottom: 1.5rem; font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase;">
+                        1. Select Service & Schedule</h4>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+                        <select name="service" id="booking-service-select" class="form-control" required>
+                            <option value="">Choose a Service...</option>
+                            <option value="Mehendi Designs">Mehendi Designs</option>
+                            <option value="Hair Styling">Hair Styling</option>
+                            <option value="Professional Makeup">Professional Makeup</option>
+                            <option value="Event Decoration">Event Decoration</option>
+                        </select>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label
+                                    style="font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; display: block;">Pick
+                                    Date</label>
+                                <input type="date" name="date" class="form-control" required id="booking-date-input">
+                            </div>
+                            <div>
+                                <label
+                                    style="font-size: 0.7rem; text-transform: uppercase; margin-bottom: 5px; display: block;">Pick
+                                    Time</label>
+                                <input type="time" name="time" class="form-control" required id="booking-time-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Location -->
+                <div style="margin-bottom: 3rem;">
+                    <h4
+                        style="margin-bottom: 1.5rem; font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase;">
+                        2. Service Location</h4>
+                    <input type="text" name="address" placeholder="Full Address" class="form-control" required
+                        style="margin-bottom: 1rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <input type="text" name="city" placeholder="City" class="form-control" required>
+                        <input type="text" name="postalCode" placeholder="Postal Code" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- Step 3: Contact -->
+                <div style="margin-bottom: 3rem;">
+                    <h4
+                        style="margin-bottom: 1.5rem; font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase;">
+                        3. Contact Details</h4>
+                    <input type="email" name="email" placeholder="Email Address" class="form-control" required
+                        style="margin-bottom: 1rem;">
+                    <input type="tel" name="phone" placeholder="Phone Number" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; text-align: center;">Confirm
+                    Booking</button>
+                <p style="text-align: center; margin-top: 1.5rem; font-size: 0.8rem; opacity: 0.6;">You'll receive a
+                    confirmation email shortly. Payment to be made after service.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo">MRF FASHIONS</div>
+                <p style="opacity: 0.6; font-size: 0.9rem;">Elevating your beauty and home with artisanal craftsmanship
+                    and premium services delivered to your door.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="products.html">Handmade Products</a></li>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Social</h4>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container copyright">
+            &copy; 2024 MRF FASHIONS. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Pre-fill from URL params
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('service')) document.getElementById('booking-service-select').value = params.get('service');
+            if (params.get('date')) document.getElementById('booking-date-input').value = params.get('date');
+            if (params.get('time')) document.getElementById('booking-time-input').value = params.get('time');
+        });
+    </script>
+</body>
+
+</html>

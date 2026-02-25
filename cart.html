@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bag | MRF FASHIONS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">MRF FASHIONS</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="nav-icons" style="display: flex; gap: 1.5rem; align-items: center;">
+                <a href="cart.html" style="position: relative;">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count-badge">0</span>
+                </a>
+                <a href="booking.html" class="btn btn-outline" style="padding: 0.5rem 1.5rem; font-size: 0.7rem;">Book
+                    Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Content -->
+    <section style="padding-top: 150px;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your Shopping Bag</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div id="cart-items-container" style="display: grid; grid-template-columns: 2fr 1fr; gap: 4rem;">
+                <div id="cart-list">
+                    <!-- Dynamic -->
+                </div>
+
+                <div id="cart-summary"
+                    style="background: var(--surface); padding: 3rem; border: 1px solid var(--border); height: fit-content;">
+                    <h4 style="margin-bottom: 2rem; letter-spacing: 0.1em; text-transform: uppercase;">Order Summary
+                    </h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span>Subtotal</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span>Shipping</span>
+                        <span>$0.00</span>
+                    </div>
+                    <div
+                        style="border-top: 1px solid var(--border); margin: 1.5rem 0; padding-top: 1.5rem; display: flex; justify-content: space-between; font-weight: 600; font-size: 1.2rem;">
+                        <span>Total</span>
+                        <span id="cart-total">$0.00</span>
+                    </div>
+                    <button id="checkout-btn" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">Proceed to
+                        Checkout</button>
+                    <p
+                        style="text-align: center; margin-top: 1rem; font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.05em;">
+                        SECURE CHECKOUT</p>
+                </div>
+            </div>
+
+            <div id="empty-cart-msg" style="display: none; text-align: center; padding: 5rem 0;">
+                <p style="font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.5;">Your bag is currently empty.</p>
+                <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-logo">MRF FASHIONS</div>
+                <p style="opacity: 0.6; font-size: 0.9rem;">Elevating your beauty and home with artisanal craftsmanship
+                    and premium services delivered to your door.</p>
+            </div>
+        </div>
+        <div class="container copyright">
+            &copy; 2024 MRF FASHIONS. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+
+            document.getElementById('checkout-btn').addEventListener('click', () => {
+                const cart = JSON.parse(localStorage.getItem('mrf_cart'));
+                simulateEmailNotification('New Order Placed!', `A new order for ${cart.length} items has been placed. Total: $${calculateTotal(cart)}`);
+                localStorage.setItem('mrf_cart', JSON.stringify([]));
+                window.location.href = 'thank-you.html?type=order';
+            });
+        });
+
+        function renderCart() {
+            const container = document.getElementById('cart-list');
+            const cart = JSON.parse(localStorage.getItem('mrf_cart') || '[]');
+
+            if (cart.length === 0) {
+                document.getElementById('cart-items-container').style.display = 'none';
+                document.getElementById('empty-cart-msg').style.display = 'block';
+                return;
+            }
+
+            container.innerHTML = cart.map((item, index) => `
+                <div style="display: flex; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border);">
+                    <img src="${item.img}" style="width: 120px; height: 120px; object-fit: cover;">
+                    <div style="flex-grow: 1;">
+                        <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">${item.name}</h4>
+                        <p style="color: var(--primary); font-weight: 500;">$${item.price}</p>
+                    </div>
+                    <button onclick="removeItem(${index})" style="background: none; border: none; cursor: pointer; color: var(--text-muted);"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            `).join('');
+
+            const total = calculateTotal(cart);
+            document.getElementById('subtotal').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('cart-total').innerText = `$${total.toFixed(2)}`;
+            updateCartCount();
+        }
+
+        function calculateTotal(cart) {
+            return cart.reduce((sum, item) => sum + parseFloat(item.price), 0);
+        }
+
+        window.removeItem = (index) => {
+            const cart = JSON.parse(localStorage.getItem('mrf_cart'));
+            cart.splice(index, 1);
+            localStorage.setItem('mrf_cart', JSON.stringify(cart));
+            renderCart();
+            showNotification('Item removed from bag');
+        };
+    </script>
+</body>
+
+</html>
